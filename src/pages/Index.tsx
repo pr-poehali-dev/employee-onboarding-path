@@ -186,36 +186,36 @@ export default function Index() {
   };
 
   return (
-    <div className="min-h-screen font-golos" style={{ background: "#0F1117", color: "#E8E8ED" }}>
+    <div className="min-h-screen font-golos" style={{ background: "#F5F4F9", color: "#1E1E2E" }}>
       <style>{`
         .step-card {
-          background: #181B25;
-          border: 1px solid #2A2D3A;
+          background: #FFFFFF;
+          border: 1px solid #E2E0EC;
           border-radius: 12px;
           transition: all 0.25s ease;
           cursor: pointer;
         }
         .step-card:hover {
-          border-color: #3A3E4E;
-          box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+          border-color: #C8C5D6;
+          box-shadow: 0 4px 24px rgba(91,95,230,0.08);
           transform: translateY(-1px);
         }
         .step-card.active {
           border-color: #5B5FE6;
-          box-shadow: 0 6px 32px rgba(91,95,230,0.15);
+          box-shadow: 0 6px 32px rgba(91,95,230,0.12);
         }
-        .step-card.done { background: #14161E; opacity: 0.65; }
+        .step-card.done { background: #FAFAFE; opacity: 0.7; }
         .icon-box {
           width: 44px; height: 44px; border-radius: 10px;
           display: flex; align-items: center; justify-content: center; flex-shrink: 0;
         }
         .check-btn {
           width: 26px; height: 26px; border-radius: 50%;
-          border: 1.5px solid #3A3E4E; background: transparent;
+          border: 1.5px solid #E2E0EC; background: transparent;
           cursor: pointer; display: flex; align-items: center;
           justify-content: center; transition: all 0.2s ease; flex-shrink: 0;
         }
-        .check-btn:hover { border-color: #34D399; background: rgba(52,211,153,0.1); }
+        .check-btn:hover { border-color: #34D399; background: #e8f5ed; }
         .check-btn.checked { background: #34D399; border-color: #34D399; }
         .detail-panel { animation: expand-panel 0.3s ease-out forwards; }
         @keyframes expand-panel {
@@ -225,8 +225,8 @@ export default function Index() {
         .onb-tag {
           display: inline-flex; align-items: center; padding: 3px 10px;
           border-radius: 20px; font-size: 12px; font-weight: 500;
-          background: rgba(255,255,255,0.05); color: #7A7D8E;
-          border: 1px solid #2A2D3A; white-space: nowrap;
+          background: #EEEDFA; color: #6E6B80;
+          border: 1px solid #E2E0EC; white-space: nowrap;
         }
         @keyframes card-in {
           from { opacity: 0; transform: translateY(18px); }
@@ -235,7 +235,7 @@ export default function Index() {
         .card-animate { animation: card-in 0.4s ease-out forwards; opacity: 0; }
         .progress-bar-track {
           height: 3px; width: 100%; border-radius: 4px; overflow: hidden;
-          background: #2A2D3A;
+          background: #E2E0EC;
         }
         .progress-bar-fill {
           height: 100%; border-radius: 4px;
@@ -252,7 +252,7 @@ export default function Index() {
         .role-pill.active-pill { border-color: currentColor; }
         .task-row {
           display: flex; align-items: flex-start; gap: 10px;
-          padding: 8px 0; border-bottom: 1px solid #1E2130;
+          padding: 8px 0; border-bottom: 1px solid #F0EFF5;
           animation: fadeRow 0.2s ease forwards; opacity: 0;
         }
         .task-row:last-child { border-bottom: none; }
@@ -265,7 +265,7 @@ export default function Index() {
         }
         .decision-box {
           border-radius: 10px; padding: 16px; margin-top: 12px;
-          border: 1px dashed #3A3E4E; background: #14161E;
+          border: 1px dashed #D0CDE0; background: #FAFAFE;
         }
         .decision-branch {
           border-radius: 8px; padding: 12px; margin-top: 8px;
@@ -273,7 +273,7 @@ export default function Index() {
         }
         .connector-line {
           width: 1px; height: 16px; margin-left: 27px;
-          background: linear-gradient(to bottom, #2A2D3A, transparent);
+          background: linear-gradient(to bottom, #E2E0EC, transparent);
         }
         .verme-logo {
           display: flex; align-items: center; gap: 10px; margin-bottom: 28px;
@@ -286,12 +286,12 @@ export default function Index() {
         }
         .verme-logo-text {
           font-size: 20px; font-weight: 700; letter-spacing: -0.02em;
-          color: #E8E8ED;
+          color: #1E1E2E;
         }
         .hero-glow {
           position: absolute; top: -100px; left: 50%; transform: translateX(-50%);
           width: 500px; height: 300px; border-radius: 50%;
-          background: radial-gradient(ellipse, rgba(91,95,230,0.12) 0%, transparent 70%);
+          background: radial-gradient(ellipse, rgba(91,95,230,0.08) 0%, transparent 70%);
           pointer-events: none; z-index: 0;
         }
       `}</style>
@@ -309,10 +309,10 @@ export default function Index() {
             style={{ letterSpacing: "0.2em", textTransform: "uppercase", color: "#5B5FE6" }}>
             Трек адаптации сотрудника
           </p>
-          <h1 className="font-cormorant text-5xl font-medium leading-tight mb-3" style={{ color: "#E8E8ED" }}>
-            Путь нового<br /><span className="italic" style={{ color: "#818CF8" }}>сотрудника</span>
+          <h1 className="font-cormorant text-5xl font-medium leading-tight mb-3" style={{ color: "#1E1E2E" }}>
+            Путь нового<br /><span className="italic" style={{ color: "#5B5FE6" }}>сотрудника</span>
           </h1>
-          <p className="text-base leading-relaxed max-w-md" style={{ color: "#7A7D8E" }}>
+          <p className="text-base leading-relaxed max-w-md" style={{ color: "#6E6B80" }}>
             Интерактивная карта адаптации — от пребординга до завершения испытательного срока. Нажимайте на этапы, чтобы увидеть задачи каждой роли.
           </p>
         </div>
@@ -320,13 +320,13 @@ export default function Index() {
 
       {/* Role filter */}
       <div className="px-6 max-w-2xl mx-auto mb-4">
-        <p className="text-xs font-medium mb-2.5" style={{ letterSpacing: "0.1em", textTransform: "uppercase", color: "#7A7D8E" }}>
+        <p className="text-xs font-medium mb-2.5" style={{ letterSpacing: "0.1em", textTransform: "uppercase", color: "#6E6B80" }}>
           Фильтр по роли
         </p>
         <div className="flex flex-wrap gap-2">
           <button
             className={`role-pill ${!activeRole ? "active-pill" : ""}`}
-            style={{ background: !activeRole ? "#5B5FE6" : "rgba(255,255,255,0.05)", color: !activeRole ? "#fff" : "#7A7D8E" }}
+            style={{ background: !activeRole ? "#5B5FE6" : "#EEEDFA", color: !activeRole ? "#fff" : "#6E6B80" }}
             onClick={() => setActiveRole(null)}
           >
             Все роли
@@ -336,8 +336,8 @@ export default function Index() {
               key={key}
               className={`role-pill ${activeRole === key ? "active-pill" : ""}`}
               style={{
-                background: activeRole === key ? roles[key].bg : "rgba(255,255,255,0.05)",
-                color: activeRole === key ? roles[key].color : "#7A7D8E",
+                background: activeRole === key ? roles[key].bg : "#EEEDFA",
+                color: activeRole === key ? roles[key].color : "#6E6B80",
               }}
               onClick={() => setActiveRole(activeRole === key ? null : key)}
             >
@@ -351,8 +351,8 @@ export default function Index() {
       {/* Progress */}
       <div className="px-6 max-w-2xl mx-auto mb-8">
         <div className="flex justify-between items-center mb-2">
-          <span className="text-sm" style={{ color: "#7A7D8E" }}>Прогресс</span>
-          <span className="text-sm font-semibold" style={{ color: "#E8E8ED" }}>{completed.length} из {steps.length}</span>
+          <span className="text-sm" style={{ color: "#6E6B80" }}>Прогресс</span>
+          <span className="text-sm font-semibold" style={{ color: "#1E1E2E" }}>{completed.length} из {steps.length}</span>
         </div>
         <div className="progress-bar-track">
           <div className="progress-bar-fill" style={{ width: `${progress}%` }} />
@@ -393,14 +393,14 @@ export default function Index() {
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-0.5 flex-wrap">
                         <h3 className="font-semibold text-base" style={{
-                          color: isCompleted ? "#7A7D8E" : "#E8E8ED",
+                          color: isCompleted ? "#9996A8" : "#1E1E2E",
                           textDecoration: isCompleted ? "line-through" : "none",
                         }}>
                           {step.title}
                         </h3>
                         <span className="onb-tag">{step.period}</span>
                       </div>
-                      <p className="text-sm truncate" style={{ color: "#5A5D6E" }}>
+                      <p className="text-sm truncate" style={{ color: "#8A879A" }}>
                         {step.tasks.length} {step.tasks.length === 1 ? "задача" : step.tasks.length < 5 ? "задачи" : "задач"}
                         {" · "}
                         {[...new Set(step.tasks.map(t => roles[t.role].label))].join(", ")}
@@ -413,17 +413,17 @@ export default function Index() {
                         onClick={(e) => toggleComplete(step.id, e)}
                         title={isCompleted ? "Снять отметку" : "Отметить выполненным"}
                       >
-                        {isCompleted && <Icon name="Check" size={12} style={{ color: "#0F1117" }} />}
+                        {isCompleted && <Icon name="Check" size={12} style={{ color: "#fff" }} />}
                       </button>
-                      <Icon name={isActive ? "ChevronUp" : "ChevronDown"} size={17} style={{ color: "#5A5D6E" }} />
+                      <Icon name={isActive ? "ChevronUp" : "ChevronDown"} size={17} style={{ color: "#8A879A" }} />
                     </div>
                   </div>
 
                   {isActive && (
-                    <div className="detail-panel" style={{ borderTop: "1px solid #2A2D3A" }}>
+                    <div className="detail-panel" style={{ borderTop: "1px solid #E2E0EC" }}>
                       <div className="p-5 pt-4">
                         {visibleTasks.length === 0 ? (
-                          <p className="text-sm" style={{ color: "#5A5D6E" }}>
+                          <p className="text-sm" style={{ color: "#8A879A" }}>
                             Нет задач для выбранной роли на этом этапе
                           </p>
                         ) : (
@@ -439,7 +439,7 @@ export default function Index() {
                                   <span className="text-xs font-medium mr-2" style={{ color: roles[task.role].color }}>
                                     {roles[task.role].label}
                                   </span>
-                                  <span className="text-sm" style={{ color: "#C0C1CC" }}>{task.text}</span>
+                                  <span className="text-sm" style={{ color: "#3A3850" }}>{task.text}</span>
                                 </div>
                               </div>
                             ))}
@@ -448,7 +448,7 @@ export default function Index() {
 
                         {step.decision && (
                           <div className="decision-box" onClick={(e) => e.stopPropagation()}>
-                            <p className="text-sm font-semibold flex items-center gap-2 mb-3" style={{ color: "#E8E8ED" }}>
+                            <p className="text-sm font-semibold flex items-center gap-2 mb-3" style={{ color: "#1E1E2E" }}>
                               <Icon name="GitFork" size={15} style={{ color: "#5B5FE6" }} />
                               {step.decision.question}
                             </p>
@@ -459,7 +459,7 @@ export default function Index() {
                                   <p className="text-xs font-semibold mb-1" style={{ color: step.decision.yes.color }}>
                                     {step.decision.yes.label}
                                   </p>
-                                  <p className="text-xs" style={{ color: "#9A9BAA" }}>
+                                  <p className="text-xs" style={{ color: "#5A576E" }}>
                                     {step.decision.yes.text}
                                   </p>
                                 </div>
@@ -470,7 +470,7 @@ export default function Index() {
                                   <p className="text-xs font-semibold mb-1" style={{ color: step.decision.no.color }}>
                                     {step.decision.no.label}
                                   </p>
-                                  <p className="text-xs" style={{ color: "#9A9BAA" }}>
+                                  <p className="text-xs" style={{ color: "#5A576E" }}>
                                     {step.decision.no.text}
                                   </p>
                                 </div>
@@ -488,10 +488,10 @@ export default function Index() {
         </div>
       </main>
 
-      <footer className="py-8 px-6 text-center" style={{ borderTop: "1px solid #2A2D3A" }}>
-        <p className="text-xs" style={{ color: "#5A5D6E" }}>
+      <footer className="py-8 px-6 text-center" style={{ borderTop: "1px solid #E2E0EC" }}>
+        <p className="text-xs" style={{ color: "#8A879A" }}>
           Остались вопросы? Напишите в HR —{" "}
-          <a href="mailto:hr@verme.ru" className="underline transition-colors hover:text-[#818CF8]" style={{ color: "#5A5D6E" }}>
+          <a href="mailto:hr@verme.ru" className="underline transition-colors hover:text-[#5B5FE6]" style={{ color: "#8A879A" }}>
             hr@verme.ru
           </a>
         </p>
