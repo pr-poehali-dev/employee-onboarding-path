@@ -309,11 +309,11 @@ export default function Index() {
             style={{ letterSpacing: "0.2em", textTransform: "uppercase", color: "#5B5FE6" }}>
             Трек адаптации сотрудника
           </p>
-          <h1 className="text-3xl font-bold leading-tight mb-2" style={{ color: "#1E1E2E" }}>
-            Путь нового <span style={{ color: "#5B5FE6" }}>сотрудника</span>
+          <h1 className="text-4xl font-bold leading-tight mb-3" style={{ color: "#1E1E2E" }}>
+            Путь нового<br /><span style={{ color: "#5B5FE6" }}>сотрудника</span>
           </h1>
-          <p className="text-sm leading-relaxed max-w-md" style={{ color: "#6E6B80" }}>
-            Интерактивная карта адаптации — от пребординга до завершения ИС.
+          <p className="text-base leading-relaxed max-w-md" style={{ color: "#6E6B80" }}>
+            Интерактивная карта адаптации — от пребординга до завершения испытательного срока. Нажимайте на этапы, чтобы увидеть задачи каждой роли.
           </p>
         </div>
       </header>
