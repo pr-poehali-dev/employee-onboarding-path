@@ -15,6 +15,22 @@ interface DecisionBranch {
   color: string;
 }
 
+interface Contact {
+  name: string;
+  role: string;
+  email: string;
+  phone: string;
+}
+
+interface SubStep {
+  id: string;
+  icon: string;
+  title: string;
+  description: string;
+  items: string[];
+  contact: Contact;
+}
+
 interface Step {
   id: number;
   icon: string;
@@ -22,6 +38,7 @@ interface Step {
   period: string;
   color: string;
   tasks: Task[];
+  subSteps?: SubStep[];
   decision?: {
     question: string;
     yes: DecisionBranch;
@@ -66,6 +83,56 @@ const steps: Step[] = [
       { role: "buddy", text: "Знакомится лично с новичком" },
       { role: "buddy", text: "Совместный обед" },
       { role: "buddy", text: "Отвечает на бытовые вопросы" },
+    ],
+    subSteps: [
+      {
+        id: "2-1",
+        icon: "KeyRound",
+        title: "Получение логинов и паролей",
+        description: "Вы получите учётные данные для входа во все корпоративные системы: почта, CRM, мессенджеры, внутренний портал и прочие сервисы.",
+        items: ["Корпоративная почта", "CRM-система", "1С / ERP", "Slack / Teams", "VPN"],
+        contact: { name: "Алексей Сидоров", role: "Системный администратор", email: "it@verme.ru", phone: "+7 (900) 123-45-01" },
+      },
+      {
+        id: "2-2",
+        icon: "Monitor",
+        title: "Выдача оборудования",
+        description: "Вам подготовят рабочее оборудование: ноутбук с установленным ПО, монитор, рабочий телефон и необходимые аксессуары.",
+        items: ["Ноутбук", "Монитор", "Корпоративный телефон", "Клавиатура и мышь"],
+        contact: { name: "Марина Козлова", role: "Офис-менеджер", email: "office@verme.ru", phone: "+7 (900) 123-45-02" },
+      },
+      {
+        id: "2-3",
+        icon: "CreditCard",
+        title: "Выдача постоянного пропуска",
+        description: "Вам оформят постоянный пропуск в здание, ключи от офиса и при необходимости карту парковки.",
+        items: ["Пропуск в здание", "Ключ от офиса", "Карта парковки"],
+        contact: { name: "Дмитрий Петров", role: "Административный директор", email: "admin@verme.ru", phone: "+7 (900) 123-45-03" },
+      },
+      {
+        id: "2-4",
+        icon: "FileText",
+        title: "Кадровые документы и политики",
+        description: "HR-специалист ознакомит вас с трудовым договором, внутренними регламентами и кодексом корпоративной этики.",
+        items: ["Трудовой договор", "Должностная инструкция", "Кодекс этики", "Регламент отпусков"],
+        contact: { name: "Ольга Новикова", role: "HR-менеджер", email: "hr@verme.ru", phone: "+7 (900) 123-45-04" },
+      },
+      {
+        id: "2-5",
+        icon: "ShieldCheck",
+        title: "Обучение правилам ИБ",
+        description: "Специалист по ИБ проведёт инструктаж по правилам работы с данными и попросит подписать соглашение о конфиденциальности.",
+        items: ["Инструктаж по ИБ", "Политика паролей", "NDA / Соглашение о конфиденциальности"],
+        contact: { name: "Игорь Захаров", role: "Специалист по ИБ", email: "security@verme.ru", phone: "+7 (900) 123-45-05" },
+      },
+      {
+        id: "2-6",
+        icon: "Users",
+        title: "Знакомство с командой",
+        description: "1:1 с непосредственным руководителем, знакомство с командой отдела и общий welcome-звонок с коллегами.",
+        items: ["1:1 с руководителем", "Встреча с командой", "Welcome-звонок", "Экскурсия по офису"],
+        contact: { name: "Елена Громова", role: "Руководитель отдела", email: "manager@verme.ru", phone: "+7 (900) 123-45-06" },
+      },
     ],
   },
   {
@@ -166,6 +233,7 @@ export default function Index() {
   const [completed, setCompleted] = useState<number[]>([]);
   const [activeStep, setActiveStep] = useState<number | null>(null);
   const [activeRole, setActiveRole] = useState<RoleKey | null>(null);
+  const [activeSubStep, setActiveSubStep] = useState<string | null>(null);
 
   const toggleComplete = (id: number, e: React.MouseEvent) => {
     e.stopPropagation();
@@ -275,6 +343,57 @@ export default function Index() {
           width: 1px; height: 16px; margin-left: 27px;
           background: linear-gradient(to bottom, #E2E0EC, transparent);
         }
+        .substep-list {
+          margin-top: 16px; border-top: 1px solid #F0EFF5; padding-top: 12px;
+        }
+        .substep-row {
+          border: 1px solid #EEEDFA;
+          border-radius: 10px; margin-bottom: 8px; overflow: hidden;
+          transition: border-color 0.2s;
+        }
+        .substep-row:last-child { margin-bottom: 0; }
+        .substep-row.open { border-color: #C4C1DF; }
+        .substep-header {
+          display: flex; align-items: center; gap: 10px;
+          padding: 10px 12px; cursor: pointer;
+          background: #FAFAFE; transition: background 0.15s;
+        }
+        .substep-header:hover { background: #F3F2FB; }
+        .substep-icon {
+          width: 30px; height: 30px; border-radius: 7px;
+          display: flex; align-items: center; justify-content: center;
+          background: #EEEDFA; flex-shrink: 0;
+        }
+        .substep-body {
+          padding: 12px 14px 14px;
+          border-top: 1px solid #EEEDFA;
+          background: #FFFFFF;
+          animation: expand-panel 0.25s ease-out forwards;
+        }
+        .substep-tag {
+          display: inline-flex; align-items: center; padding: 2px 8px;
+          border-radius: 12px; font-size: 11px; font-weight: 500;
+          background: #EEEDFA; color: #6E6B80;
+          border: 1px solid #E2E0EC; white-space: nowrap;
+        }
+        .contact-mini {
+          background: #F5F4F9; border-radius: 8px; padding: 10px 12px;
+          border: 1px solid #E2E0EC; margin-top: 10px;
+        }
+        .contact-link-mini {
+          color: #8A879A; text-decoration: none; font-size: 12px;
+          display: flex; align-items: center; gap: 5px;
+          transition: color 0.15s;
+        }
+        .contact-link-mini:hover { color: #5B5FE6; }
+        .write-btn-mini {
+          display: flex; align-items: center; gap: 5px;
+          font-size: 11px; font-weight: 500; color: #5B5FE6;
+          background: #EEEDFA; border: 1px solid #C4C1DF;
+          border-radius: 6px; padding: 5px 10px; cursor: pointer;
+          transition: all 0.2s; white-space: nowrap; flex-shrink: 0;
+        }
+        .write-btn-mini:hover { background: #5B5FE6; color: #fff; border-color: #5B5FE6; }
         .verme-logo {
           display: flex; align-items: center; gap: 10px; margin-bottom: 28px;
         }
@@ -443,6 +562,57 @@ export default function Index() {
                                 </div>
                               </div>
                             ))}
+                          </div>
+                        )}
+
+                        {step.subSteps && (
+                          <div className="substep-list" onClick={(e) => e.stopPropagation()}>
+                            <p className="text-xs font-semibold mb-3" style={{ letterSpacing: "0.1em", textTransform: "uppercase", color: "#8A879A" }}>
+                              Шаги первого дня
+                            </p>
+                            {step.subSteps.map((sub) => {
+                              const isSubOpen = activeSubStep === sub.id;
+                              return (
+                                <div key={sub.id} className={`substep-row${isSubOpen ? " open" : ""}`}>
+                                  <div className="substep-header" onClick={() => setActiveSubStep(isSubOpen ? null : sub.id)}>
+                                    <div className="substep-icon">
+                                      <Icon name={sub.icon} size={15} style={{ color: "#5B5FE6" }} />
+                                    </div>
+                                    <span className="text-sm font-medium flex-1" style={{ color: "#1E1E2E" }}>{sub.title}</span>
+                                    <Icon name={isSubOpen ? "ChevronUp" : "ChevronDown"} size={15} style={{ color: "#8A879A" }} />
+                                  </div>
+                                  {isSubOpen && (
+                                    <div className="substep-body">
+                                      <p className="text-sm mb-3" style={{ color: "#6E6B80" }}>{sub.description}</p>
+                                      <div className="flex flex-wrap gap-1.5 mb-3">
+                                        {sub.items.map((item) => (
+                                          <span key={item} className="substep-tag">{item}</span>
+                                        ))}
+                                      </div>
+                                      <div className="contact-mini">
+                                        <div className="flex items-start justify-between gap-3">
+                                          <div>
+                                            <p className="text-sm font-semibold mb-0.5" style={{ color: "#1E1E2E" }}>{sub.contact.name}</p>
+                                            <p className="text-xs mb-2" style={{ color: "#8A879A" }}>{sub.contact.role}</p>
+                                            <div className="flex flex-col gap-1">
+                                              <a href={`mailto:${sub.contact.email}`} className="contact-link-mini">
+                                                <Icon name="Mail" size={12} />{sub.contact.email}
+                                              </a>
+                                              <a href={`tel:${sub.contact.phone}`} className="contact-link-mini">
+                                                <Icon name="Phone" size={12} />{sub.contact.phone}
+                                              </a>
+                                            </div>
+                                          </div>
+                                          <button className="write-btn-mini" onClick={() => { window.location.href = `mailto:${sub.contact.email}`; }}>
+                                            <Icon name="Send" size={11} />Написать
+                                          </button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  )}
+                                </div>
+                              );
+                            })}
                           </div>
                         )}
 
